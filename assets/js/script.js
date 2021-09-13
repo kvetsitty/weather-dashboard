@@ -1,10 +1,10 @@
 var searchFormEl = document.querySelector("#user-form");
 var cityNameInputEl = document.querySelector("#city-name");
 var currentWeatherContainerEl = document.querySelector("#current-weather");
-var fiveDaySearchTerm = document.querySelector("#five-day");
+var searchTerm = document.querySelector("#five-day");
 
 var getCityName = function(cityName) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/reverse?lat=" + lat + "&lon=" + lon + "&appid=appid=19a893b5ecc620220fec7cb9fb804164";
+    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchTerm + ",US&limit=1&appid=19a893b5ecc620220fec7cb9fb804164";
 
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
@@ -30,3 +30,9 @@ var formSubmitHandler = function(event) {
     }
     console.log(event);
 };
+
+searchFormEl.addEventListener("submit", formSubmitHandler);
+
+var displayCity = function(city, searchTerm) {
+    
+}
