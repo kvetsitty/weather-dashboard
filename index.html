@@ -20,14 +20,9 @@
         <!--search form-->
         <div class="row">
         <div class="col-3">
-            <div class="card">
-                <h3 class="card-header">Search for a City:</h3>
-                <form id="user-form" class="card-body">
-                    <label class="form-label" for="city-name"></label>
-                    <input name="city-name" id="city-name" type="text" autofocus="true" class="form-input" />
-                    <button type="submit" class="btn">Search</button>
-                </form>
-            </div>
+            <input type="text" id="searchTerm" />
+            <button id="searchBtn">Search</button>
+            <div id="response-container"></div>
         </div>
             <div class="col-9">
                 <div id="current-weather">

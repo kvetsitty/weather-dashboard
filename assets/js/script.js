@@ -1,38 +1,44 @@
-var searchFormEl = document.querySelector("#user-form");
-var cityNameInputEl = document.querySelector("#city-name");
-var currentWeatherContainerEl = document.querySelector("#current-weather");
-var searchTerm = document.querySelector("#five-day");
+function myFunction() {
+  // Create a variable called `searchTerm` that will use `document.querySelector()` to target the `id` of the input
+  // Use `.value` to capture the value of the input and store it in the variable
+  var searchTerm = document.querySelector('#searchTerm').value;
 
-var getCityName = function(cityName) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchTerm + ",US&limit=1&appid=19a893b5ecc620220fec7cb9fb804164";
+  fetch(
+    'http://api.openweathermap.org/geo/1.0/direct?q=' + searchTerm + ',US&limit=1&appid=19a893b5ecc620220fec7cb9fb804164'
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data)
+      console.log(data[0]);
 
-    fetch(apiUrl).then(function(response) {
-        if (response.ok) {
-          response.json().then(function(data) {
-            displayCity(data, city);
-          });
-        } else {
-          alert("Please Enter a City Name");
-        }
-      })
-};
+      var lat = data[0].lat
+      var lon = data[0].lon
+      // Create a variable that will select the <div> where the GIF will be displayed
 
-var formSubmitHandler = function(event) {
-    event.preventDefault();
-    //get value from input element
-    var cityName = cityNameInputEl.value.trim();
+      var responseContainerEl = document.querySelector('#response-container');
 
-    if (cityName) {
-        getCityName(cityName);
-        nameInputEl.value = "";
-    } else {
-        alert("Please Enter a City Name");
-    }
-    console.log(event);
-};
+      var oneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" +lon +"&appid=19a893b5ecc620220fec7cb9fb804164"
+      fetch(oneCall)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log(data)
 
-searchFormEl.addEventListener("submit", formSubmitHandler);
-
-var displayCity = function(city, searchTerm) {
-    
+          
+        })
+    });
 }
+
+//
+
+
+
+
+//
+
+var searchBtn = document.querySelector("#searchBtn")
+
+searchBtn.addEventListener('click', myFunction)
